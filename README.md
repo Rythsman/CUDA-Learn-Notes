@@ -1,22 +1,36 @@
+<div align="center">
+  <p align="center">
+    <h2>📚 Modern CUDA Learn Notes with PyTorch for Beginners 🐑</h2>
+    <a href="#cuda-kernel">📚200+ CUDA Kernels</a> | <a href="#my-blogs-part-1"> 📚100+ Blogs</a> | <a href="#hgemm-mma-bench"> ⚡️HGEMM MMA</a> | <a href="#fa-mma-bench"> ⚡️FA-2 MMA </a> <p>
+  </p>
+  <img src='https://github.com/user-attachments/assets/9306862b-2a30-4a87-bb33-0fde9e9d7cea' width=250 >
+  <div align='center'>
+      <img src=https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg >
+      <img src=https://img.shields.io/badge/Language-CUDA-brightgreen.svg >
+      <img src=https://img.shields.io/github/watchers/DefTruth/CUDA-Learn-Notes?color=9cc >
+      <img src=https://img.shields.io/github/forks/DefTruth/CUDA-Learn-Notes.svg?style=social >
+      <img src=https://img.shields.io/github/stars/DefTruth/CUDA-Learn-Notes.svg?style=social >
+      <img src=https://img.shields.io/badge/Release-v3.0.0-brightgreen.svg >
+      <img src=https://img.shields.io/badge/License-GPLv3.0-turquoise.svg >
+ </div>
+</div>
+
+📚 **Modern CUDA Learn Notes with PyTorch** for Beginners: It includes **Tensor/CUDA Cores, TF32/F16/BF16/F8**, [📖200+ CUDA Kernels🔥🔥(Easy -> Hard++)](#cuda-kernel) with PyTorch bindings, [📖100+ LLM/VLM/CV/CUDA/CuTe🔥](#my-blogs-part-1) blogs, [📖toy-hgemm⚡️⚡️](./kernels/hgemm) which can achieve `98%~100%` performance of **cuBLAS**, and [📖flash-attention-mma⚡️⚡️](./kernels/flash-attn) using Tensor Cores with pure MMA PTX. Welcome to 🌟👆🏻star this repo to support me, many thanks ~ 🎉🎉
+
+<div id="contents"></div>    
+
+## 📖 News 🔥🔥
+<div id="news"></div>  
+
+- [2025-01-08]: [📚Split Q + Fully QKV Fine-grained Tiling](#mma-tiling-qkv) has been refactored into 🤖[ffpa-attn-mma](https://github.com/DefTruth/ffpa-attn-mma): 📚FFPA - Yet another Faster Flash Prefill Attention with O(1)🎉SRAM complexity for headdim > 256, **1.8x~3x**🎉faster than SDPA EA: [📈L20 ~1.9x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-l20), [📈 A30 ~1.8x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-a30), [📈3080 ~2.9x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-3080), [📈4090 ~2.1x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-4090).  
+
 <div align='center'>
-  <img src='https://github.com/user-attachments/assets/b2578723-b7a7-4d8f-bcd1-5008947b808a' >
+  <img src='https://github.com/user-attachments/assets/cba2edce-ac0d-412e-823c-7eea2cc63f83' height="170px" width="270px">
+  <img src='https://github.com/user-attachments/assets/447e2937-f7c8-47c8-8550-8c0c71b910e6' height="170px" width="270px">
+  <img src='https://github.com/user-attachments/assets/65a8d564-8fa7-4d66-86b9-e238feb86143' height="170px" width="270px">
 </div> 
 
-<div align='center'>
-  <img src=https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg >
-  <img src=https://img.shields.io/badge/Language-CUDA-brightgreen.svg >
-  <img src=https://img.shields.io/github/watchers/DefTruth/cuda-learn-note?color=9cc >
-  <img src=https://img.shields.io/github/forks/DefTruth/cuda-learn-note.svg?style=social >
-  <img src=https://img.shields.io/github/stars/DefTruth/cuda-learn-note.svg?style=social >
-  <img src=https://img.shields.io/badge/Release-v2.6-brightgreen.svg >
-  <img src=https://img.shields.io/badge/License-GPLv3.0-turquoise.svg >
- </div>   
-
-<div id="contents"></div>  
-
-📚 **Modern CUDA Learn Notes with PyTorch** for Beginners: It includes **Tensor/CUDA Cores, TF32/F16/BF16/F8**, [📖150+ CUDA Kernels🔥🔥(Easy -> Hard++)](#cuda-kernel) with PyTorch bindings, [📖100+ LLM/VLM/CV/CUDA/CuTe🔥](#my-blogs-part-1) blogs, [📖toy-hgemm⚡️⚡️](./kernels/hgemm) which can achieve `98%~100%` performance of **cuBLAS**, and [📖flash-attention-mma⚡️⚡️](./kernels/flash-attn) using Tensor Cores with pure MMA PTX. Welcome to 🌟👆🏻star this repo to support me, many thanks ~ 🎉🎉
-
-<div id="hgemm-sgemm"></div>  
+- [2024-12-02]: HGEMM MMA kernels has been refactored into 🤖[hgemm-tensorcores-mma](https://github.com/DefTruth/hgemm-tensorcores-mma): ⚡️Write HGEMM from scratch using Tensor Cores with WMMA, MMA and CuTe API, achieve peak⚡️ performance.
 
 <div align='center'>
   <img src='https://github.com/user-attachments/assets/71927ac9-72b3-4ce9-b0e2-788b5885bc99' height="170px" width="270px">
@@ -24,47 +38,48 @@
   <img src='https://github.com/user-attachments/assets/9472e970-c083-4b31-9252-3eeecc761078' height="170px" width="270px">
 </div> 
 
+
+## 📖 HGEMM Benchmark 🎉🎉
+
+<div id="hgemm-mma-bench"></div>  
+
 Currently, on NVIDIA L20, RTX 4090 and RTX 3080 Laptop, compared with cuBLAS's default Tensor Cores algorithm, the `HGEMM (WMMA/MMA/CuTe)` in this repo (`blue`🔵) can achieve `98%~100%` of its (`orange`🟠) performance. Please check [toy-hgemm library⚡️⚡️](./kernels/hgemm) or [hgemm-tensorcores-mma⚡️⚡️](https://github.com/DefTruth/hgemm-tensorcores-mma) repo for more details.
 
 ![toy-hgemm-library](https://github.com/user-attachments/assets/962bda14-b494-4423-b8eb-775da9f5503d)
 
-|CUDA Cores|Sliced K (Loop over K)|Tile Block (BMxBK)|Tile Thread (t 8x8)|
+|📚Feature |📚Feature |📚Feature |📚Feature|
 |:---:|:---:|:---:|:---:|
-|✔️|✔️|✔️|✔️|
-|WMMA (m16n16k16)|MMA (m16n8k16)|Pack LDST (128 bits)|SMEM Padding|
-|✔️|✔️|✔️|✔️|
-|Copy Async|Tile MMA (More Threads)|Tile Warp (More Values)|Multi Stages (2/3/4)|  
-|✔️|✔️|✔️|✔️|
-|Reg Double Buffers|Block Swizzle|Warp Swizzle|SMEM Swizzle (CuTe/MMA)|
-|✔️|✔️|✔️|✔️|
-|Collective Store (Shfl)|Row Major (NN)|Col Major (TN)| SGEMM FP32/TF32|
-|✔️|✔️|✔️|✔️|
+|✔️CUDA/**Tensor Cores**|✔️Loop over K|✔️Tile Block(BMxBK)|✔️Tile Threads(T 8x8)|
+|✔️WMMA(m16n16k16)|✔️MMA(m16n8k16)|✔️Pack LDST(128 bits)|✔️SMEM Padding|
+|✔️Copy Async|✔️Tile MMAs|✔️Tile Warps|✔️**Multi Stages(2~4)**|  
+|✔️Register Double Buffers|✔️**Block Swizzle**|✔️**Warp Swizzle**|✔️**SMEM Swizzle**(CuTe/MMA)|
+|✔️Collective Store(Shfl)|✔️Layout NN|✔️Layout TN|✔️SGEMM FP32/TF32|
 
+## 📖 FA2-MMA Benchmark 🎉🎉 
 
-I have also implemented **FlashAttention-2** using pure MMA PTX instructions, which supports features such as Multi-Stages, Tile MMA, Tile Warp, Shared KV SMEM, **Fully Shared QKV SMEM**, **Prefetch Q s2r**, **Prefetch K/V g2s**, **QK Fine-grained Tiling**, Collective Store, etc. Please refer to [flash-attention-mma⚡️⚡️](./kernels/flash-attn) for more details.
+<div id="fa-mma-bench"></div>  
+
+I have also implemented **FlashAttention-2** using pure MMA PTX instructions, which supports features such as Multi-Stages, Tile MMA, Tile Warp, Shared KV SMEM, **Fully Shared QKV SMEM**, **Prefetch Q s2r**, **Prefetch K/V g2s**, **QKV Fine-grained Tiling**, Collective Store, etc. Please refer to [flash-attention-mma⚡️⚡️](./kernels/flash-attn) for more details.
 
 ![flash-attn-mma](https://github.com/user-attachments/assets/6f66796d-44d5-4ec1-b224-af997bd152b2)
 
-|Tensor Cores|Loop over Seqlen/Headdim |Tile Block (Br, Bc)|MMA (m16n8k16)|
+|📚Feature |📚Feature |📚Feature |📚Feature|
 |:---:|:---:|:---:|:---:|
-|✔️|✔️|✔️|✔️|
-|Pack LDST (128 bits)|SMEM **Swizzle**/Padding |Copy Async|Tile MMA (More Threads)|
-|✔️|✔️|✔️|✔️|
-|Tile Warp (More Values)|Multi Stages (1/2)|Collective Store (Shfl)|**Split KV/Q**|
-|✔️|✔️|✔️|✔️|
-|**Shared QKV/KV** SMEM|**Prefetch Q** s2r|**Prefetch K/V** g2s|**QK Fine-grained Tiling**|
-|✔️|✔️|✔️|✔️|
+|✔️Tensor Cores|✔️Loop over N/D |✔️Tile Block(Br, Bc)|✔️MMA(m16n8k16)|
+|✔️Pack LDST(128 bits)|✔️SMEM **Swizzle**/Padding |✔️Copy Async|✔️Tile MMAs|
+|✔️Tile Warps|✔️Multi Stages(1/2)|✔️Collective Store(Shfl)|✔️**Split KV/Q**|
+|✔️**Shared QKV** SMEM|✔️**Prefetch Q** s2r|✔️**Prefetch KV** g2s|✔️**QKV Fine-grained Tiling**|
 
-Currently, for small-scale attention `(B<=4, H <=48, SeqLen <= 8192, D <= 64)` it can run faster than FA2/SDPA on some Devices. For example, on NVIDIA RTX 3080 Laptop, [📚 Split Q + Fully Shared QKV SMEM](#mma-share-qkv) method can achieve **55 TFLOPS (D=64)** that almost **~1.5x** 🎉 faster than FA2. On NVIDIA L20, [📚 Split Q + QK Fine-grained Tiling](#mma-tiling-qk) method can achieve **81 TFLOPS (D=512)** that almost **~1.4x** 🎉 faster than SDPA (EFFICIENT ATTENTION). However, for large-scale attention, there remains a performance gap. Stay tuned for updates ~ (MMA Acc F16, softmax Acc F32 vs FA2 MMA/softmax Acc F32, 👇Benchmark)
+Currently, for small-scale attention `(B<=4, H <=48, SeqLen <= 8192, D <= 64)` it can run faster than FA2/SDPA on some Devices. For example, on NVIDIA RTX 3080 Laptop, [📚 Split Q + Fully Shared QKV SMEM](#mma-share-qkv) method can achieve **55 TFLOPS (D=64)** that almost **~1.5x** 🎉 faster than FA2. On NVIDIA L20, 🤖[ffpa-attn-mma](https://github.com/DefTruth/ffpa-attn-mma) method can achieve **104 TFLOPS (D=512)** that almost **~1.8x** 🎉 faster than SDPA (EFFICIENT ATTENTION). However, for large-scale attention, there remains a performance gap. Stay tuned for updates ~ (MMA Acc F16/F32, softmax Acc F32 vs FA2 MMA/softmax Acc F32, 👇Benchmark)
 
-|Algorithm| (B,H,N,D) | 3080 Laptop | L20 | RTX 4090 |   
+|Algorithm| (B,H,N,D) | RTX 3080 Laptop | L20 | RTX 4090 |   
 |:---:|:---:|:---:|:---:|:---:|  
 |FlashAttention-2|(1,8,8192,64)|37 TFLOPS|100 TFLOPS|145 TFLOPS|  
-|split-q+share-qkv+stage2|(1,8,8192,64)|**55 TFLOPS**|99 TFLOPS|**221 TFLOPS**|  
+|share-qkv+stage2|(1,8,8192,64)|**55 TFLOPS**|99 TFLOPS|**221 TFLOPS**|  
 |FlashAttention-2|(1,48,8192,64)|37 TFLOPS|109 TFLOPS|163 TFLOPS|
-|split-q+share-qkv+stage2|(1,48,8192,64)|**48 TFLOPS**|107 TFLOPS|**224 TFLOPS**|
+|share-qkv+stage2|(1,48,8192,64)|**48 TFLOPS**|107 TFLOPS|**224 TFLOPS**|
 |SDPA(EFFICIENT ATTENTION)|(1,48,8192,512)|16 TFLOPS|58 TFLOPS|85 TFLOPS|
-|split-q+tiling-qk+swizzle-qk+stage2|(1,48,8192,512)|**23 TFLOPS**|**81 TFLOPS**|**127 TFLOPS**|
+|🤖[ffpa-attn-mma](https://github.com/DefTruth/ffpa-attn-mma)|(1,48,8192,512)|**39 TFLOPS**|**104 TFLOPS**|**200 TFLOPS**|
 |Precision Errors vs FA2/SDPA| / | max: < ~1e-3 | min: ~0.0 | mean: < ~1e-5 |
 
 The `Split KV` and `Split Q` implementations have been carried out in [flash-attention-mma⚡️⚡️](./kernels/flash-attn) for performance comparison. The `Split KV` method, which involves splitting all QKV across MMA (Warps), is slower than `Split Q` method, which splitting Q across MMA(Warps) and keep access KV for all MMA(Warps). 
@@ -123,13 +138,27 @@ flash_attn_mma_stages_split_q_shared_qkv_kernel(half* Q, half* K, half* V, half*
 <div id="mma-tiling-qk"></div>  
 
 ```C++
-// Fine-grained tiling at the MMA level for Q and K results in a constant SRAM usage of
+// Fine-grained tiling at the MMA level for Q@K^T results in a constant SRAM usage of
 // 64 * kMmaAtomK for Q and K. For V, the SRAM complexity is O(kMmaAtomK * d), leading to
 // an overall SRAM complexity of O(kMmaAtomK * d). Consequently, this approach allows us to
-// extend D (head dimension) up to 1024. Stay tuned for updates ~
+// extend D (head dimension) up to 1024.
 __global__ void // Q, K, V, O -> [B, H, N, D]
 flash_attn_mma_stages_split_q_tiling_qk_kernel(half* Q, half* K, half* V, half* O, ...);
 ```
+
+- 📚 Split Q + Fully QKV Fine-grained Tiling (**O(2xBrx16)~O(1) SRAM** vs FA2 **O(4xBrxd) SRAM**)
+
+<div id="mma-tiling-qkv"></div>  
+
+```C++
+// Fine-grained tiling at the MMA level for all Q@K^T and P@V results in a constant SRAM usage of
+// Br * 16 or Bc * 16 for Q, K, V, leading to an overall SRAM complexity of O(Br * 16). Consequently,
+// this approach allows us to run faster than SDPA w or w/o MMA Acc F32. 
+__global__ void // Q, K, V, O -> [B, H, N, D]
+flash_attn_mma_stages_split_q_tiling_qkv_kernel(half* Q, half* K, half* V, half* O, ...);
+```
+💡NOTE: [📚Split Q + Fully QKV Fine-grained Tiling](#mma-tiling-qkv) has been refactored into 🤖[ffpa-attn-mma](https://github.com/DefTruth/ffpa-attn-mma).
+ 
 ## ©️Citations🎉🎉
 
 ```BibTeX
@@ -142,7 +171,7 @@ flash_attn_mma_stages_split_q_tiling_qk_kernel(half* Q, half* K, half* V, half* 
 }
 ```
 
-## 📖 150+ CUDA Kernels 🔥🔥 (Easy -> Hard++) ([©️back👆🏻](#contents))  
+## 📖 200+ CUDA Kernels 🔥🔥 (Easy -> Hard++) ([©️back👆🏻](#contents))  
 
 <div id="cuda-kernel"></div>    
 
@@ -330,16 +359,25 @@ The kernels listed here will guide you through a step-by-step progression, rangi
 
 ### 📚 Hard+ ⭐️⭐️⭐️⭐️ & Hard++ ⭐️⭐️⭐️⭐️⭐️ ([©️back👆🏻](#cuda-kernel)) 
 
+- 📚 FlashAttention-2 MMA (MMA Acc F32/F16, swizzle, QKV smem share, fine-grained tiling, etc.🎉)
+
 <div id="cuda-kernel-hard-plus"></div>  
 
 |📖 CUDA Kernel| 📖 Elem DType| 📖 Acc DType| 📖 Docs | 📖 Level |
 |:---|:---|:---|:---|:---|   
+| ✔️ [How to implement MMA smem swizzle*](./kernels/swizzle/mma_simple_swizzle.cu)|f16|f16|[link](./kernels/swizzle)|⭐️⭐️⭐️| 
 | ✔️ [flash_attn_mma_stages_split_kv*](./kernels/flash-attn/mma/basic/flash_attn_mma_split_kv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️| 
 | ✔️ [flash_attn_mma_stages_split_q*](./kernels/flash-attn/mma/basic/flash_attn_mma_split_q.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
 | ✔️ [flash_attn_mma_stages...shared_kv*](./kernels/flash-attn/mma/basic/flash_attn_mma_share_kv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
 | ✔️ [flash_attn_mma_stages...shared_qkv*](./kernels/flash-attn/mma/basic/flash_attn_mma_share_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
 | ✔️ [flash_attn_mma_stages...tiling_qk*](./kernels/flash-attn/mma/basic/flash_attn_mma_tiling_qk.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|     
-| ? [flash_attn_mma_stages...tiling_qkv*](./kernels/flash-attn/mma/basic/flash_attn_mma_tiling_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|     
+| ✔️ [flash_attn_mma_stages...tiling_qkv*](./kernels/flash-attn/mma/basic/flash_attn_mma_tiling_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma_stages...shared_kv{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_share_kv_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma_stages...shared_qkv{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_share_qkv_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma_stages...tiling_qk{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_tiling_qk_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma_stages...tiling_qkv{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_tiling_qkv_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️| 
+| ✔️ [flash_attn_mma...shared_kv{f32}{rr}*](./kernels/flash-attn/mma/others/flash_attn_mma_share_kv_F32F16F16F32_rr.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma...shared_qkv{f32}{rr}*](./kernels/flash-attn/mma/others/flash_attn_mma_share_qkv_F32F16F16F32_rr.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️| 
 | ✔️ [flash_attn_mma...shared_kv_swizzle{q}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_share_kv_swizzle_q.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
 | ✔️ [flash_attn_mma...shared_kv_swizzle{qk}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_share_kv_swizzle_qk.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
 | ✔️ [flash_attn_mma...shared_kv_swizzle{qkv}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_share_kv_swizzle_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
@@ -348,21 +386,33 @@ The kernels listed here will guide you through a step-by-step progression, rangi
 | ✔️ [flash_attn_mma...shared_qkv_swizzle{qkv}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_share_qkv_swizzle_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|
 | ✔️ [flash_attn_mma...tiling_qk_swizzle{q}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qk_swizzle_q.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
 | ✔️ [flash_attn_mma...tiling_qk_swizzle{qk}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qk_swizzle_qk.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ✔️ [flash_attn_mma...tiling_qk_swizzle{qkv}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qk_swizzle_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️| 
-| ? [flash_attn_mma...tiling_qkv_swizzle{q}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_q.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ? [flash_attn_mma...tiling_qkv_swizzle{qk}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_qk.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ? [flash_attn_mma...tiling_qkv_swizzle{qkv}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️| 
-| ✔️ [flash_attn_mma...shared_kv{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_share_kv_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ✔️ [flash_attn_mma...shared_kv{f32}{rr}*](./kernels/flash-attn/mma/others/flash_attn_mma_share_kv_F32F16F16F32_rr.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ✔️ [flash_attn_mma...shared_qkv{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_share_qkv_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ✔️ [flash_attn_mma...shared_qkv{f32}{rr}*](./kernels/flash-attn/mma/others/flash_attn_mma_share_qkv_F32F16F16F32_rr.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ✔️ [flash_attn_mma...tiling_qk{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_tiling_qk_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ✔️ [flash_attn_mma...tiling_qkv{f32}*](./kernels/flash-attn/mma/basic/flash_attn_mma_tiling_qkv_F32F16F16F32_rr.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
-| ✔️ [How to implement MMA smem swizzle*](./kernels/swizzle/mma_simple_swizzle.cu)|f16|f16|[link](./kernels/swizzle)|⭐️⭐️⭐️| 
+| ✔️ [flash_attn_mma...tiling_qk_swizzle{qkv}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qk_swizzle_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma...tiling_qkv_swizzle{q}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_q.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma...tiling_qkv_swizzle{qk}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_qk.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn_mma...tiling_qkv_swizzle{qkv}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_qkv.cu)|f16|f16|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️| 
+| ✔️ [flash_attn...tiling_qkv_swizzle{q}{f32}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_q_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn...tiling_qkv_swizzle{qk}{f32}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_qk_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️|   
+| ✔️ [flash_attn...tiling_qkv_swizzle{qkv}{f32}*](./kernels/flash-attn/mma/swizzle/flash_attn_mma_tiling_qkv_swizzle_qkv_F32F16F16F32.cu)|f16|f32|[link](./kernels/flash-attn)|⭐️⭐️⭐️⭐️| 
 
-**rr**: means reduce registers usage (for `d>128`); **f32**: means MMA accumulate with FP32 dtype, otherwise, FP16. softmax Acc dtype is always be FP32 for high precision; **swizzle**: now, only support smem swizzle for MMA.
+💡NOTE: **rr**: means reduce registers usage (for `d>128`); **f32**: means MMA accumulate with FP32 dtype, otherwise, FP16. softmax Acc dtype is always be FP32 for high precision; **swizzle**: now, only support smem swizzle for MMA.
 
-## 📖 博客目录
+- 📚 FFPA Attention MMA (**1.8x~3x**🎉faster vs SDPA EA, D > 256, FA2 not supported)
+
+|📖 CUDA Kernel| 📖 Elem DType| 📖 Acc DType| 📖 Docs | 📖 Level |
+|:---|:---|:---|:---|:---|   
+| ✔️ [ffpa_mma_stages_split_q_L1_F16F16F16](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F16_L1.cu)|f16|f16|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ✔️ [ffpa_mma_stages_split_q_L1_F16F16F32](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F32_L1.cu)|f16|f32|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ✔️ [ffpa_mma_stages_split_q_L1_mixed_acc](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F32_L1.cu)|f16|QK f32, PV f16|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ⚠️ [ffpa_mma_stages_split_q_L2_F16F16F16](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F16_L2.cu)|f16|f16|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ⚠️ [ffpa_mma_stages_split_q_L2_F16F16F32](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F32_L2.cu)|f16|f32|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ⚠️ [ffpa_mma_stages_split_q_L2_mixed_acc](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F32_L2.cu)|f16|QK f32, PV f16|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ⚠️ [ffpa_mma_stages_split_q_L3_F16F16F16](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F16_L3.cu)|f16|f16|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ⚠️ [ffpa_mma_stages_split_q_L3_F16F16F32](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F32_L3.cu)|f16|f32|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+| ⚠️ [ffpa_mma_stages_split_q_L3_mixed_acc](https://github.com/DefTruth/ffpa-attn-mma/blob/main/csrc/cuffpa/ffpa_attn_F16F16F32_L3.cu)|f16|QK f32, PV f16|[link](https://github.com/DefTruth/ffpa-attn-mma)|⭐️⭐️⭐️⭐️| 
+
+💡NOTE: 🤖[ffpa-attn-mma](https://github.com/DefTruth/ffpa-attn-mma): 📚FFPA - Yet another Faster Flash Prefill Attention with O(1)🎉SRAM complexity for headdim > 256, **1.8x~3x**🎉faster than SDPA EA: [📈L20 ~1.9x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-l20), [📈 A30 ~1.8x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-a30), [📈3080 ~2.9x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-3080), [📈4090 ~2.1x↑🎉](https://github.com/DefTruth/ffpa-attn-mma?tab=readme-ov-file#L1-bench-4090).  
+
+## 📖 100+ LLM/VLM/CV/CUDA/CuTe Tech Blogs
 
 <div id="my-blogs-part-1"></div>  
 
@@ -370,6 +420,7 @@ The kernels listed here will guide you through a step-by-step progression, rangi
 
 |📖 类型-标题|📖 作者| 📖 推荐 |  
 |:---|:---|:---|    
+|[[CUDA基础][开篇]📖CUDA-Learn-Notes: v3.0 大升级-面试刷题不迷路](https://zhuanlan.zhihu.com/p/19862356369)|@DefTruth|⭐️⭐️⭐⭐️| 
 |[[分布式训推][张量/序列并行]📖图解DeepSpeed-Ulysses&Megatron-LM TP/SP](https://zhuanlan.zhihu.com/p/5750410146)|@DefTruth|⭐️⭐️| 
 |[[VLM推理优化][InternVL系列]📖InternLM2/.../InternVL1.5系列笔记: 核心点解析](https://zhuanlan.zhihu.com/p/702481058)|@DefTruth|⭐️⭐️| 
 |[[LLM推理优化][TensorRT-LLM][5w字]📖TensorRT-LLM部署调优-指北](https://zhuanlan.zhihu.com/p/699333691)|@DefTruth|⭐️⭐️⭐️| 
@@ -493,6 +544,7 @@ The kernels listed here will guide you through a step-by-step progression, rangi
 | [[GPU指令集架构][精解]📖NVidia GPU指令集架构-浮点运算](https://zhuanlan.zhihu.com/p/695667044)|@reed|⭐️⭐️⭐️|
 | [[GPU指令集架构][精解]📖NVidia GPU指令集架构-整数运算](https://zhuanlan.zhihu.com/p/700921948)|@reed|⭐️⭐️⭐️|
 | [[GPU指令集架构][精解]📖NVidia GPU指令集架构-比特和逻辑操作](https://zhuanlan.zhihu.com/p/712356884)|@reed|⭐️⭐️⭐️|
+| [[GPU指令集架构][精解]📖NVidia GPU指令集架构-Warp级和Uniform操作](https://zhuanlan.zhihu.com/p/712357647)|@reed|⭐️⭐️⭐️|
 | [[CUDA优化][入门]📖CUDA（一）：CUDA 编程基础](https://zhuanlan.zhihu.com/p/645330027)|@紫气东来|⭐️⭐️⭐️|
 | [[CUDA优化][入门]📖CUDA（二）：GPU的内存体系及其优化指南](https://zhuanlan.zhihu.com/p/654027980)|@紫气东来|⭐️⭐️⭐️|
 | [[CUDA优化][实践]📖CUDA（三）：通用矩阵乘法：从入门到熟练](https://zhuanlan.zhihu.com/p/657632577)|@紫气东来|⭐️⭐️⭐️|
@@ -522,7 +574,7 @@ GNU General Public License v3.0
 
 ## 🎉Contribute ([©️back👆🏻](#contents))
 
-<div id="Contribute"></div>  
+<div id="contribute"></div>  
 
 How to contribute? Star this repo or check [🌤🌤CONTRIBUTE🎉🎉](https://github.com/DefTruth/CUDA-Learn-Notes/issues/50). 
 
@@ -531,12 +583,14 @@ How to contribute? Star this repo or check [🌤🌤CONTRIBUTE🎉🎉](https://
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DefTruth/CUDA-Learn-Notes&type=Date&theme=dark" />
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DefTruth/CUDA-Learn-Notes&type=Date" />
-   <img img width=450 height=300 alt="Star History Chart" src="https://api.star-history.com/svg?repos=DefTruth/CUDA-Learn-Notes&type=Date" />
+   <img width=400 height=300 alt="Star History Chart" src="https://api.star-history.com/svg?repos=DefTruth/CUDA-Learn-Notes&type=Date" />
  </picture>
 </a>
 </div>
 
-## 📖 References ([©️back👆🏻](#contents))
+## 📖 References ([©️back👆🏻](#contents)) 
+<div id="ref"></div>  
+
 - [flash-attention-minimal](https://github.com/tspeterkim/flash-attention-minimal)
 - [tiny-flash-attention](https://github.com/66RING/tiny-flash-attention)
 - [cute-gemm](https://github.com/reed-lau/cute-gemm)
@@ -545,5 +599,6 @@ How to contribute? Star this repo or check [🌤🌤CONTRIBUTE🎉🎉](https://
 - [cuda_hgemm](https://github.com/Bruce-Lee-LY/cuda_hgemm)
 - [cuda-tensorcore-hgemm](https://github.com/nicolaswilde/cuda-tensorcore-hgemm)
 - [How_to_optimize_in_GPU](https://github.com/Liu-xiandong/How_to_optimize_in_GPU/tree/master/sgemv)
+- [how-to-optim-algorithm-in-cuda](https://github.com/BBuf/how-to-optim-algorithm-in-cuda) 
 - [cute_gemm](https://github.com/weishengying/cute_gemm)
 - [cutlass](https://github.com/NVIDIA/cutlass)
